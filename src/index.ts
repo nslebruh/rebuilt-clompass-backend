@@ -192,10 +192,10 @@ AppDataSource.initialize().then(async () => {
                         })
                       })
                     } else {
-                      res.status(401).json({ error: "Invalid credentials bozo" });
+                      res.status(401).json({ error: "Password not valid" });
                     }
                 } else {
-                    res.status(401).json({ error: "Invalid credentials bozo" });
+                    res.status(401).json({ error: "User doesn't exist" });
                 }
             })
     }, async (req, res) => {
