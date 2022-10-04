@@ -54,6 +54,7 @@ AppDataSource.initialize().then(async () => {
 
     
     const app = express()
+    app.set("trust proxy", true)
     app.use(session({
         resave: false,
         secret: "test",
