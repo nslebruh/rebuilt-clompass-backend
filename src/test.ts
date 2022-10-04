@@ -1,0 +1,6 @@
+let date = new Date()
+console.log(date)
+console.log(date.getTime())
+let date2 = new Date(new Date(date.getTime()).setMinutes(new Date(date).getMinutes() -new Date(date).getTimezoneOffset()))
+console.log(date2)
+console.log(date2.getTime())
