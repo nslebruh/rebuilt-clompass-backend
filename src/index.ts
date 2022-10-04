@@ -60,7 +60,6 @@ AppDataSource.initialize().then(async () => {
         name: "test",
         cookie: {
             secure: true,
-            sameSite: false
         },
         saveUninitialized: false,
         store: new TypeormStore({
