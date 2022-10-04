@@ -59,7 +59,7 @@ AppDataSource.initialize().then(async () => {
         secret: "test",
         name: "test",
         cookie: {
-            domain: "localhost",
+            domain: "clompass.com",
             secure: true,
             sameSite: false
         },
@@ -74,7 +74,7 @@ AppDataSource.initialize().then(async () => {
     app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
     app.use(cors({
-        origin: 'https://localhost:3000',
+        origin: 'https://new.clompass.com',
         methods: ['POST', 'GET'],
         credentials: true,
       }));
