@@ -201,7 +201,7 @@ AppDataSource.initialize().then(async () => {
     }, async (req, res) => {
         req.session.user = res.locals.user
         console.log(req.session)
-        res.status(200).send("successfully  logged in")
+        res.status(200).send(req.session)
 })
         
 
