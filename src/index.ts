@@ -59,7 +59,6 @@ AppDataSource.initialize().then(async () => {
         secret: "test",
         name: "test",
         cookie: {
-            domain: "clompass.com",
             secure: true,
             sameSite: false
         },
