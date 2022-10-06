@@ -69,8 +69,6 @@ AppDataSource.initialize().then(async () => {
         }).connect(sessions)
         
     }))
-    app.use(bodyParser.urlencoded({extended: false}))
-    app.use(bodyParser.json())
     app.use(cors({
         origin: 'https://new.clompass.com',
         methods: ['POST', 'GET'],
@@ -100,10 +98,10 @@ AppDataSource.initialize().then(async () => {
         res.status(200).send("Successfully authenticated")
         
     })
-    app.use("/get",  isAuthenticated, get)
-    app.use("/create", isAuthenticated, post)
-    app.use("/update", isAuthenticated, update)
-    app.use("/delete", isAuthenticated, remove)
+    app.use("/get",  isAuthenticated, bodyParser.json(), get)
+    app.use("/create", isAuthenticated, bodyParser.urlencoded({extended: false}),  post)
+    app.use("/update", isAuthenticated, bodyParser.urlencoded({extended: false}), update)
+    app.use("/delete", isAuthenticated, bodyParser.urlencoded({extended: false}), remove)
     // test endpoint
     app.get("/api", (req, res) => {
         res.status(200).send("pog")
@@ -239,9 +237,9 @@ AppDataSource.initialize().then(async () => {
     app.listen(PORT, () => {
         console.log("listening on port " + PORT)
     })
-    //https.createServer({key: key, cert: cert}, app).listen(PORT, () => {
-    //    console.log("listening on port " + PORT)
-    //})
+    https.createServer(/*{key: key, cert: cert},*/ app).listen(PORT, () => {
+        console.log("listening on port " + PORT)
+    })
 
 
 }).catch(error => console.log(error))
