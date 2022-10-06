@@ -21,7 +21,7 @@ router.get("/student", async (req, res) => {
         res.status(200).jsonp(data)
     } catch (error) {
         console.log(error)
-        res.status(400).send("Bad request bozo")
+        res.status(400).jsonp({message: "Bad request bozo"})
     }
 })
 
@@ -38,7 +38,7 @@ router.get("/subject", async (req, res) => {
         res.status(200).jsonp(data)
     } catch (error) {
         console.log(error)
-        res.status(400).send("Bad request bozo")
+        res.status(400).jsonp({message: "Bad request bozo"})
     }
 })
 
@@ -55,8 +55,13 @@ router.get("/teacher", async (req, res) => {
         res.status(200).jsonp(data)
     } catch (error) {
         console.log(error)
-        res.status(400).send("Bad request bozo")
+        res.status(400).jsonp({message: "Bad request bozo"})
     }
+})
+
+router.get("/learningTasks", async (req, res) => {
+    console.log("learning tasks got")
+    res.status(200).jsonp({message: "worked"})
 })
 router.get("/dashboard", async (req, res) => {
     console.log(req.session)

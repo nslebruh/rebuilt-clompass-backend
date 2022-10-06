@@ -95,7 +95,7 @@ AppDataSource.initialize().then(async () => {
 
     app.get("/checkAuth", isAuthenticated, async (req, res, next) => {
         console.log("Successfully authenticated")
-        res.status(200).send("Successfully authenticated")
+        res.status(200).jsonp({message: "Successfully authenticated"})
         
     })
     app.use("/get",  isAuthenticated, bodyParser.json(), get)
@@ -104,7 +104,7 @@ AppDataSource.initialize().then(async () => {
     app.use("/delete", isAuthenticated, bodyParser.urlencoded({extended: false}), remove)
     // test endpoint
     app.get("/api", (req, res) => {
-        res.status(200).send("pog")
+        res.status(200).jsonp({message: "pog"})
     })
 
     app.post("/signup", async (req, res, next) => {
@@ -113,7 +113,7 @@ AppDataSource.initialize().then(async () => {
             next()
         } catch (error) {
             console.log(error)
-            res.status(400).send("Bad request bozo")
+            res.status(400).jsonp({message: "Bad request bozo"})
         }
     }, async (req, res, next) => {
         try {
@@ -137,18 +137,18 @@ AppDataSource.initialize().then(async () => {
                 // save the session before redirection to ensure page
                 // load does not happen before session is saved
                 req.session.save(function (err) {
-                  if (err) return res.status(500).send("An error occured bozo")
+                  if (err) return res.status(500).jsonp({message: "An error occured bozo"})
                   console.log(req.session)
                   next()
                 })
             }) 
         } catch (error) {
             console.log(error)
-            res.status(400).send("Bad request bozo")
+            res.status(400).jsonp({message: "Bad request bozo"})
         }
     }, async (req, res) => {
         req.session.user = res.locals.user
-        res.status(200).send("User created")
+        res.status(200).jsonp({message: "User created"})
     })
 
     app.post("/signin", async (req, res, next) => {
@@ -163,7 +163,7 @@ AppDataSource.initialize().then(async () => {
                 })(body, "signIn")
         } catch (err) {
             console.log(err)
-            res.status(400).send("Bad request bozo")
+            res.status(400).jsonp({message: "Bad request bozo"})
             return
         }
         await AppDataSource.getRepository(Entity.Auth).createQueryBuilder("auth").where(`auth.${body.type} = :user`, {user: body.username}).execute()
@@ -189,16 +189,16 @@ AppDataSource.initialize().then(async () => {
                         })
                       })
                     } else {
-                      res.status(401).json({ error: "Password not valid" });
+                      res.status(401).jsonp({ error: "Password not valid" });
                     }
                 } else {
-                    res.status(401).json({ error: "User doesn't exist" });
+                    res.status(401).jsonp({ error: "User doesn't exist" });
                 }
             })
     }, async (req, res) => {
         req.session.user = res.locals.user
         console.log(req.session)
-        res.status(200).send(req.session)
+        res.status(200).jsonp(req.session)
 })
         
 
@@ -220,18 +220,18 @@ AppDataSource.initialize().then(async () => {
           })
         })
       }, async (req, res) => {
-        res.status(200).send("Successfully logged out")
+        res.status(200).jsonp({message: "Successfully logged out"})
       })
     // Catch all endpoints 
 
     app.post("/*", async (req, res) => {
         console.log(req.url)
-        res.status(404).send("This doesn't exist bozo")
+        res.status(404).jsonp({message: "This doesn't exist bozo"})
     })
 
     app.get("/*", async (req, res) => {
         console.log(req.url)
-        res.status(404).send("This doesn't exist bozo")
+        res.status(404).jsonp({message: "This doesn't exist bozo"})
     })
 
     app.listen(PORT, () => {
