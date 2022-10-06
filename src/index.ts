@@ -234,9 +234,9 @@ AppDataSource.initialize().then(async () => {
         res.status(404).send("This doesn't exist bozo")
     })
 
-    app.listen(PORT, () => {
-        console.log("listening on port " + PORT)
-    })
+    //app.listen(PORT, () => {
+    //    console.log("listening on port " + PORT)
+    //})
     https.createServer(/*{key: key, cert: cert},*/ app).listen(PORT, () => {
         console.log("listening on port " + PORT)
     })
