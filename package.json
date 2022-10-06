@@ -24,6 +24,7 @@
       "express-session": "^1.17.3",
       "mysql2": "^2.3.3",
       "reflect-metadata": "^0.1.13",
+      "response-time": "^2.3.2",
       "serve-favicon": "^2.5.0",
       "typeorm": "^0.3.9"
    },

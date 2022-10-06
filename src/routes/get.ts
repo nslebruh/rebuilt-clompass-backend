@@ -5,7 +5,6 @@ import { createQuery } from "../functions"
 import {getStudentValidator, getSubjectValidator, getTeacherValidator, jsonString} from "../functions/validation"
 
 const validateJsonString = jsonString()
-console.log(validateJsonString('{"test":1}', "test"))
 
 const router = express.Router()
 
@@ -58,6 +57,10 @@ router.get("/teacher", async (req, res) => {
         console.log(error)
         res.status(400).send("Bad request bozo")
     }
+})
+router.get("/dashboard", async (req, res) => {
+    console.log(req.session)
+    res.status(200).jsonp({message: "worked"})
 })
 
 export {router}
