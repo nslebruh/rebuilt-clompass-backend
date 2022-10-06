@@ -151,7 +151,7 @@ AppDataSource.initialize().then(async () => {
         res.status(200).jsonp({message: "User created"})
     })
 
-    app.post("/signin", async (req, res, next) => {
+    app.post("/signin", bodyParser.urlencoded({extended: false}), async (req, res, next) => {
         console.log("Initial signin req.session.userId " + req.session.user)
         const body = req.body
         try {
